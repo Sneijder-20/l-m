@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¡Feliz Día Mamá!</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(to top right, #ffd6e0, #ffe6f2);
+      overflow: hidden;
+      font-family: 'Pacifico', cursive, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .page {
+      text-align: center;
+      padding: 2em;
+      background: #ffe6f2;
+      border-radius: 30px;
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+      display: none;
+      width: 90%;
+      max-width: 600px;
+      animation: fadeInUp 1s ease;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      color: #d6336c;
+      margin-bottom: 0.5em;
+    }
+
+    p {
+      font-size: 1.4em;
+      color: #c2185b;
+      margin-bottom: 1.5em;
+    }
+
+    .emoji {
+      font-family: system-ui, Apple Color Emoji, Segoe UI Emoji, Noto Color Emoji, sans-serif;
+    }
+
+    button {
+      font-family: 'Pacifico', cursive, sans-serif;
+      background-color: #ff6b81;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 10px 20px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-top: 1em;
+    }
+
+    button:hover {
+      background-color: #e94e68;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(80px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #ff4d6d;
+      transform: rotate(45deg);
+      animation: float 6s infinite ease-in;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #ff4d6d;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
+    .heart-frame {
+      display: inline-block;
+      padding: 15px;
+      border: 8px dashed #ff69b4;
+      border-radius: 30px;
+      background: repeating-linear-gradient(
+        -45deg,
+        #ffb6c1,
+        #ffb6c1 10px,
+        #ffe4e1 10px,
+        #ffe4e1 20px
+      );
+      margin: 20px auto;
+    }
+
+    .heart-frame img {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    @media (max-width: 768px) {
+      .heart-frame img {
+        width: 90vw;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .heart-frame img {
+        width: 100vw;
+      }
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Página 1 -->
+  <div class="page active" id="page1">
+    <h1>¡Feliz Día Mamá! <span class="emoji">💐</span></h1>
+    <p>Gracias por ser mi guía, mi fuerza y mi amor eterno. Te amo con todo mi corazón. <span class="emoji">❤️</span></p>
+    <button onclick="goToPage('page2')">Siguiente <span class="emoji">💌</span></button>
+  </div>
+
+  <!-- Página 2 -->
+  <div class="page" id="page2">
+    <h1>Mi Orgullo <span class="emoji">❤️‍🔥</span></h1>
+    <p>Eres mi inspiración y mi mayor orgullo, gracias por todo tu amor.</p>
+    <button onclick="goToPage('page1')">Volver al inicio</button>
+  </div>
+
+  <!-- Corazones flotando -->
+  <script>
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }
+
+    setInterval(createHeart, 300);
+
+    function goToPage(pageId) {
+      document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+        page.style.display = 'none';
+      });
+      const targetPage = document.getElementById(pageId);
+      targetPage.style.display = 'block';
+      targetPage.classList.add('active');
+    }
+  </script>
+
+  <!-- Música de fondo -->
+  <audio autoplay loop>
+    <source src="https://docs.google.com/uc?export=download&id=1jOaoK1qChzAc1g6fyNVlaiEmaYMujFC5" type="audio/mpeg">
+    Tu navegador no soporta audio HTML5.
+  </audio>
+
+</body>
+</html>
